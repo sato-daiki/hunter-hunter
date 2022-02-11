@@ -6,5 +6,6 @@ export type Option = {
 export type Quiz = {
   quizId: string;
   question: string;
+  correctOptionId: string;
   options: Option[];
 };

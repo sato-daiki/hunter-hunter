@@ -1,2 +1,2 @@
 export const NUMBER_QUESTION = 50;
-export const VIBRATION_PATTERN = 20;
+export const APP_URL = 'yahoo:co.jp';

@@ -1,13 +1,11 @@
-import React, { ReactNode, useCallback } from 'react';
+import React, { ReactNode } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
   StyleProp,
   ViewStyle,
   View,
-  Vibration,
 } from 'react-native';
-import { VIBRATION_PATTERN } from '@/config/common';
 import { mainColor } from '@/styles/common';
 
 export type ButtonProps = {
@@ -24,13 +22,6 @@ const Button: React.FC<ButtonProps & { children: ReactNode }> = ({
   onPress,
   children,
 }) => {
-  const handlePress = useCallback(() => {
-    onPress();
-    // if (flags.vibration) {
-    Vibration.vibrate(VIBRATION_PATTERN, false);
-    // }
-  }, [onPress]);
-
   return (
     <TouchableOpacity
       style={[
@@ -43,7 +34,7 @@ const Button: React.FC<ButtonProps & { children: ReactNode }> = ({
       ]}
       activeOpacity={0.4}
       disabled={!isActive}
-      onPress={handlePress}
+      onPress={onPress}
     >
       <View style={styles.innerStyle}>{children}</View>
     </TouchableOpacity>

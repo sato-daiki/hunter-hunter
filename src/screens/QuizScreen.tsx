@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { StyleSheet, View, Text, Animated } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
+import * as userActions from '@/store/actions/user';
 import { baseColor, commonText, textGrayColor } from '@/styles/common';
 import { Layout } from '@/components/atoms';
 import CommonButton from '@/components/molecules/CommonButton';
@@ -11,6 +12,9 @@ import { Quiz } from '@/types/quiz';
 import { useOption } from '@/screens/hooks/useQuiz';
 import { NUMBER_QUESTION } from '@/config/common';
 import WhiteBoard from '@/components/molecules/WhiteBoard';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { User } from '@/types/user';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Quiz'>;
 
@@ -18,10 +22,11 @@ type Props = {
   navigation: NavigationProp;
 };
 
-const quiz: Quiz = {
+const mocQuiz: Quiz = {
   quizId: '1',
   question:
     '1921(大正10)年の今日(2月11日)は、グリコキャラメルが発売された日だそうです。甘いグリコのキャラメルは今も昔も子供の憧れ。かわいいハート型をしていますが、グリコが発売された当時もハート型だった。◯か×か。',
+  correctOptionId: '1',
   options: [
     {
       quizOptionId: '1',
@@ -46,18 +51,45 @@ const quiz: Quiz = {
   ],
 };
 
+const mocQuizs: Quiz[] = [mocQuiz, mocQuiz, mocQuiz, mocQuiz];
+
 const QuizScreen: React.FC<Props> = ({ navigation }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [number, setNumber] = useState(1);
+  const dispatch: any = useDispatch();
+  const userState: User = useSelector((state: any) => state.user);
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [number, setNumber] = useState(0);
+  const [score, setScore] = useState(0);
+  const [quizs, setQuizs] = useState<Quiz[]>([]);
 
   const { fadeAnim } = useOption();
+  const { hightScore } = userState;
+
+  useEffect(() => {
+    setQuizs(mocQuizs);
+    setIsLoading(false);
+  }, []);
 
   const onPressItem = useCallback(
-    (quizOptionId: string) => {
-      console.log('quizOptionId', isLoading);
-      navigation.navigate('Result');
+    async (quizOptionId: string) => {
+      let newScore = score;
+      if (quizOptionId === quizs[number].correctOptionId) {
+        newScore += 1;
+        setScore(newScore);
+      }
+
+      const nextNumber = number + 1;
+      setNumber(nextNumber);
+
+      if (nextNumber === NUMBER_QUESTION - 1) {
+        if (!hightScore || newScore > hightScore) {
+          await dispatch(userActions.updateHightScore(newScore));
+        }
+        // 0始まりのため-1している
+        navigation.navigate('Result', { score: newScore });
+      }
     },
-    [isLoading, navigation],
+    [dispatch, hightScore, navigation, number, quizs, score],
   );
 
   return (
@@ -71,11 +103,11 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
               {number} / {NUMBER_QUESTION}
             </Text>
             <WhiteBoard>
-              <Text style={styles.questionText}>{quiz.question}</Text>
+              <Text style={styles.questionText}>{quizs[number].question}</Text>
             </WhiteBoard>
             <Animated.View style={{ opacity: fadeAnim }}>
-              {quiz.options &&
-                quiz.options.map((item, index) => (
+              {quizs[number].options &&
+                quizs[number].options.map((item, index) => (
                   <CommonButton
                     containerStyle={styles.button}
                     key={item.quizOptionId}

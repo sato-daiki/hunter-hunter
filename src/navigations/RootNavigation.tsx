@@ -9,7 +9,7 @@ import { DefaultNavigationOptions } from '@/config/NavigationOptions';
 export type RootStackParamList = {
   Home: undefined;
   Quiz: undefined;
-  Result: undefined;
+  Result: { score: number };
 };
 
 const Stack = createStackNavigator<RootStackParamList>();

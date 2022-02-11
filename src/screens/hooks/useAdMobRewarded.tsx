@@ -12,9 +12,8 @@ const ANDROID_AD_UNIT_ID = 'ca-app-pub-0770181536572634/2549755100';
 
 export const useAdMobRewarded = () => {
   const dispatch: any = useDispatch();
-  const userState: User = useSelector((state: any) => state.jenny);
-  // const { jenny } = userState;
-  const jenny = 10;
+  const userState: User = useSelector((state: any) => state.user);
+  const { jenny } = userState;
 
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -39,7 +38,7 @@ export const useAdMobRewarded = () => {
   const rewardedVideoUserDidEarnReward = useCallback(async () => {
     console.log('rewardedVideoUserDidEarnReward');
     // 広告をみた人が実行できる処理
-    await dispatch(userActions.updateCoins(jenny + 1));
+    await dispatch(userActions.updateJenny(jenny + 1));
   }, [jenny, dispatch]);
 
   const rewardedVideoDidFailToLoad = useCallback(() => {

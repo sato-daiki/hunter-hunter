@@ -27,7 +27,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
   const onPressStart = useCallback(async () => {
     if (jenny > 0) {
-      await dispatch(userActions.updateCoins(jenny - 1));
+      await dispatch(userActions.updateJenny(jenny - 1));
       navigation.navigate('Quiz');
     }
   }, [jenny, dispatch, navigation]);
@@ -46,7 +46,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         </View>
         <View style={styles.main}>
           <Image source={HomeLogo} style={styles.homeLogo} />
-
           <CommonButton
             containerStyle={styles.textButton}
             isActive={jenny > 0}
