@@ -2,12 +2,15 @@ import React, { useCallback, useState } from 'react';
 import { StyleSheet, View, Text, Animated } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { baseColor } from '@/styles/common';
+import { baseColor, commonText, textGrayColor } from '@/styles/common';
 import { Layout } from '@/components/atoms';
 import CommonButton from '@/components/molecules/CommonButton';
 import { RootStackParamList } from '@/navigations/RootNavigation';
 import Loading from '@/components/atoms/Loading';
 import { Quiz } from '@/types/quiz';
+import { useOption } from '@/screens/hooks/useQuiz';
+import { NUMBER_QUESTION } from '@/config/common';
+import WhiteBoard from '@/components/molecules/WhiteBoard';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Quiz'>;
 
@@ -17,10 +20,27 @@ type Props = {
 
 const quiz: Quiz = {
   quizId: '1',
-  question: 'aaa',
+  question:
+    '1921(大正10)年の今日(2月11日)は、グリコキャラメルが発売された日だそうです。甘いグリコのキャラメルは今も昔も子供の憧れ。かわいいハート型をしていますが、グリコが発売された当時もハート型だった。◯か×か。',
   options: [
     {
       quizOptionId: '1',
+      text: 'aaa',
+    },
+    {
+      quizOptionId: '2',
+      text: 'aaa',
+    },
+    {
+      quizOptionId: '3',
+      text: 'aaa',
+    },
+    {
+      quizOptionId: '4',
+      text: 'aaa',
+    },
+    {
+      quizOptionId: '5',
       text: 'aaa',
     },
   ],
@@ -28,10 +48,17 @@ const quiz: Quiz = {
 
 const QuizScreen: React.FC<Props> = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [number, setNumber] = useState(1);
 
-  const onPressItem = useCallback((quizOptionId: string) => {
-    console.log('quizOptionId', isLoading);
-  }, []);
+  const { fadeAnim } = useOption();
+
+  const onPressItem = useCallback(
+    (quizOptionId: string) => {
+      console.log('quizOptionId', isLoading);
+      navigation.navigate('Result');
+    },
+    [isLoading, navigation],
+  );
 
   return (
     <Layout>
@@ -40,9 +67,12 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
           <Loading />
         ) : (
           <View style={styles.main}>
-            <View style={styles.questionContainer}>
-              <Text style={styles.questionText}>問題</Text>
-            </View>
+            <Text style={styles.number}>
+              {number} / {NUMBER_QUESTION}
+            </Text>
+            <WhiteBoard>
+              <Text style={styles.questionText}>{quiz.question}</Text>
+            </WhiteBoard>
             <Animated.View style={{ opacity: fadeAnim }}>
               {quiz.options &&
                 quiz.options.map((item, index) => (
@@ -68,12 +98,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: baseColor,
-    alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 16,
   },
-  textButton: {
-    marginBottom: 11,
+  main: {
+    flex: 1,
+  },
+  number: {
+    ...commonText.number,
+    color: textGrayColor,
+    textAlign: 'right',
+    marginBottom: 8,
+  },
+  questionText: {
+    ...commonText.title,
+    color: '#fff',
+  },
+  button: {
+    marginBottom: 10,
   },
 });
 

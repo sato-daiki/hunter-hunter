@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { AppState, AppStateStatus } from 'react-native';
+import { AppState, AppStateStatus, StatusBar } from 'react-native';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
@@ -33,6 +33,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
+      <StatusBar barStyle='dark-content' />
       <NavigationContainer>
         <RootNavigation />
       </NavigationContainer>

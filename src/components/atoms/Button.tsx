@@ -8,7 +8,7 @@ import {
   Vibration,
 } from 'react-native';
 import { VIBRATION_PATTERN } from '@/config/common';
-import { buttonColor } from '@/styles/common';
+import { mainColor } from '@/styles/common';
 
 export type ButtonProps = {
   containerStyle?: StyleProp<ViewStyle>;
@@ -52,7 +52,7 @@ const Button: React.FC<ButtonProps & { children: ReactNode }> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: buttonColor,
+    backgroundColor: mainColor,
     alignContent: 'center',
     justifyContent: 'center',
     paddingVertical: 12,

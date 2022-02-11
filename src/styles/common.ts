@@ -1,11 +1,13 @@
 import { StyleSheet } from 'react-native';
 
+export const baseColor = '#F5F5F5';
 export const textColor = '#3E3E3E';
+export const mainColor = '#840303';
+export const subColor = '#2A3A3A';
+
 export const textGrayColor = '#888888';
 export const textWhiteColor = '#F5F5F5';
 export const linkTextColor = '#65D0FC';
-export const baseColor = '#F6F2EC';
-export const buttonColor = '#FCFAF8';
 export const borderColor = '#C4C4C4';
 
 export const yellow = '#FFDD5D';
@@ -25,42 +27,32 @@ export const commonText = StyleSheet.create({
   lllTitle: {
     fontSize: 32,
     lineHeight: 40,
-    color: textColor,
-  },
-  llTitle: {
-    fontSize: 24,
-    lineHeight: 36,
-    color: textColor,
-  },
-  lTitle: {
-    fontSize: 20,
-    lineHeight: 30,
-    color: textColor,
+    color: mainColor,
   },
   title: {
     fontSize: 16,
     lineHeight: 24,
-    color: textColor,
+    color: mainColor,
   },
   description: {
     fontSize: 14,
     lineHeight: 24,
-    color: textColor,
+    color: mainColor,
   },
   subText: {
     fontSize: 12,
     lineHeight: 18,
-    color: textColor,
+    color: mainColor,
   },
   note: {
     fontSize: 9,
     lineHeight: 15,
-    color: textColor,
+    color: mainColor,
   },
   number: {
     fontSize: 24,
     lineHeight: 30,
-    color: textColor,
+    color: mainColor,
   },
 });
 

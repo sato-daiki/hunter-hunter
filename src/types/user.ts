@@ -1,5 +1,6 @@
 export type User = {
-  coins: number;
+  jenny: number;
+  hightScore: number | null;
   vibration: boolean;
   // appReviewStatus: AppReviewStatus.NOT_ASK;
 };

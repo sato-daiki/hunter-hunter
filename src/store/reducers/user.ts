@@ -2,7 +2,8 @@ import { User } from '@/types/user';
 import { UPDATE_COINS, UPDATE_VIBRATION } from '../actions/user';
 
 const initialState: User = {
-  coins: 0,
+  jenny: 10,
+  hightScore: null,
   vibration: true,
 };
 
@@ -11,12 +12,12 @@ export default (state = initialState, action: any): User => {
     case UPDATE_COINS:
       return {
         ...state,
-        coins: action.coins,
+        jenny: action.jenny,
       };
     case UPDATE_VIBRATION:
       return {
         ...state,
-        coins: action.coins,
+        jenny: action.jenny,
       };
     default:
       return state;

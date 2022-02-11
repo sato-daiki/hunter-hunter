@@ -1,7 +1,13 @@
 import React from 'react';
-import {Text, StyleProp, ViewStyle, TextStyle} from 'react-native';
+import {
+  Text,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+  StyleSheet,
+} from 'react-native';
 
-import {commonText, textGrayColor} from '@/styles/common';
+import { commonText, textGrayColor } from '@/styles/common';
 import Button from '../atoms/Button';
 
 export type CommonButtonProps = {
@@ -31,7 +37,7 @@ const CommonButton: React.FC<CommonButtonProps> = ({
       <Text
         style={[
           commonText.description,
-          isActive ? undefined : {color: textGrayColor},
+          isActive ? styles.text : { color: textGrayColor },
           textStyle,
         ]}
       >
@@ -40,5 +46,11 @@ const CommonButton: React.FC<CommonButtonProps> = ({
     </Button>
   );
 };
+
+const styles = StyleSheet.create({
+  text: {
+    color: '#fff',
+  },
+});
 
 export default CommonButton;
