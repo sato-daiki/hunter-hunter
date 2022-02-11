@@ -1,4 +1,4 @@
-import React, {ReactNode, useCallback} from 'react';
+import React, { ReactNode, useCallback } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -7,10 +7,8 @@ import {
   View,
   Vibration,
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {VIBRATION_PATTERN} from '@/config/common';
-import {buttonColor} from '@/styles/common';
-import {Flags} from '@/types/flags';
+import { VIBRATION_PATTERN } from '@/config/common';
+import { buttonColor } from '@/styles/common';
 
 export type ButtonProps = {
   containerStyle?: StyleProp<ViewStyle>;
@@ -19,21 +17,19 @@ export type ButtonProps = {
   onPress: () => void;
 };
 
-const Button: React.FC<ButtonProps & {children: ReactNode}> = ({
+const Button: React.FC<ButtonProps & { children: ReactNode }> = ({
   containerStyle,
   isActive,
   isSquere = false,
   onPress,
   children,
 }) => {
-  const flags: Flags = useSelector((state: any) => state.flags);
-
   const handlePress = useCallback(() => {
     onPress();
-    if (flags.vibration) {
-      Vibration.vibrate(VIBRATION_PATTERN, false);
-    }
-  }, [flags.vibration, onPress]);
+    // if (flags.vibration) {
+    Vibration.vibrate(VIBRATION_PATTERN, false);
+    // }
+  }, [onPress]);
 
   return (
     <TouchableOpacity
@@ -47,9 +43,7 @@ const Button: React.FC<ButtonProps & {children: ReactNode}> = ({
       ]}
       activeOpacity={0.4}
       disabled={!isActive}
-      onPress={!flags.longPress ? handlePress : undefined}
-      onLongPress={flags.longPress ? handlePress : undefined}
-      delayLongPress={100}
+      onPress={handlePress}
     >
       <View style={styles.innerStyle}>{children}</View>
     </TouchableOpacity>

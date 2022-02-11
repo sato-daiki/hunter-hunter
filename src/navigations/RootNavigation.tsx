@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { DefaultNavigationOptions } from '@/config/NavigationOptions';
 import HomeScreen from '@/screens/HomeScreen';
 import QuizScreen from '@/screens/QuizScreen';
 import ResultScreen from '@/screens/ResultScreen';
+import { DefaultNavigationOptions } from '@/config/NavigationOptions';
 
 export type RootStackParamList = {
   Home: undefined;

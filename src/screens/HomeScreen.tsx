@@ -22,7 +22,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch: any = useDispatch();
   const userState: User = useSelector((state: any) => state.coins);
   const { coins } = userState;
-
   const { isLoading, showAdReward } = useAdMobRewarded();
 
   const onPressStart = useCallback(async () => {
@@ -30,11 +29,11 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
       await dispatch(userActions.updateCoins(coins - 1));
       navigation.navigate('Quiz');
     }
-  }, [navigation]);
+  }, [coins, dispatch, navigation]);
 
   const onPressAds = useCallback(() => {
     showAdReward();
-  }, [navigation]);
+  }, [showAdReward]);
 
   return (
     <Layout>

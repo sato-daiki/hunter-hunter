@@ -30,7 +30,7 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onPressItem = useCallback((quizOptionId: string) => {
-    console.log('quizOptionId', quizOptionId);
+    console.log('quizOptionId', isLoading);
   }, []);
 
   return (
