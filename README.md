@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 # hunter-hunter
-=======
+
 ```
 1.ONEDRIVE にエクセルファイルをあげる
 2.csv ファイルをアウトプットする
@@ -9,4 +8,3 @@
 4.node csv.ts を実行すると、outputs フォルダに list.json ファイルがあるのでコピーする
 5.hunter-hunter の assets.quizAll.tsx に貼り付ける
 ```
->>>>>>> master
