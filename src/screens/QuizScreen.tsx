@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, View, Text, Animated } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import arrayShuffle from 'array-shuffle';
 
 import * as userActions from '@/store/actions/user';
 import { baseColor, commonText, textGrayColor } from '@/styles/common';
@@ -15,43 +16,13 @@ import WhiteBoard from '@/components/molecules/WhiteBoard';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { User } from '@/types/user';
+import { quizAll } from '@assets/quizAll';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Quiz'>;
 
 type Props = {
   navigation: NavigationProp;
 };
-
-const mocQuiz: Quiz = {
-  quizId: '1',
-  question:
-    '1921(大正10)年の今日(2月11日)は、グリコキャラメルが発売された日だそうです。甘いグリコのキャラメルは今も昔も子供の憧れ。かわいいハート型をしていますが、グリコが発売された当時もハート型だった。◯か×か。',
-  correctOptionId: '1',
-  options: [
-    {
-      quizOptionId: '1',
-      text: 'aaa',
-    },
-    {
-      quizOptionId: '2',
-      text: 'aaa',
-    },
-    {
-      quizOptionId: '3',
-      text: 'aaa',
-    },
-    {
-      quizOptionId: '4',
-      text: 'aaa',
-    },
-    {
-      quizOptionId: '5',
-      text: 'aaa',
-    },
-  ],
-};
-
-const mocQuizs: Quiz[] = [mocQuiz, mocQuiz, mocQuiz, mocQuiz];
 
 const QuizScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch: any = useDispatch();
@@ -60,20 +31,23 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [number, setNumber] = useState(0);
   const [score, setScore] = useState(0);
-  const [quizs, setQuizs] = useState<Quiz[]>([]);
+  const [quiz, setQuiz] = useState<Quiz[]>([]);
 
   const { fadeAnim } = useOption();
   const { hightScore } = userState;
 
   useEffect(() => {
-    setQuizs(mocQuizs);
+    const quizShuffle = arrayShuffle(quizAll);
+    const newQuiz = quizShuffle.slice(0, NUMBER_QUESTION);
+    setQuiz(newQuiz);
     setIsLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onPressItem = useCallback(
-    async (quizOptionId: string) => {
+    async (optionId: string) => {
       let newScore = score;
-      if (quizOptionId === quizs[number].correctOptionId) {
+      if (optionId === '0') {
         newScore += 1;
         setScore(newScore);
       }
@@ -89,13 +63,13 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
         navigation.navigate('Result', { score: newScore });
       }
     },
-    [dispatch, hightScore, navigation, number, quizs, score],
+    [dispatch, hightScore, navigation, number, score],
   );
 
   return (
     <Layout>
       <View style={styles.container}>
-        {isLoading ? (
+        {isLoading || !quiz ? (
           <Loading />
         ) : (
           <View style={styles.main}>
@@ -103,18 +77,18 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
               {number} / {NUMBER_QUESTION}
             </Text>
             <WhiteBoard>
-              <Text style={styles.questionText}>{quizs[number].question}</Text>
+              <Text style={styles.questionText}>{quiz[number].question}</Text>
             </WhiteBoard>
             <Animated.View style={{ opacity: fadeAnim }}>
-              {quizs[number].options &&
-                quizs[number].options.map((item, index) => (
+              {quiz[number].options &&
+                arrayShuffle(quiz[number].options).map((item) => (
                   <CommonButton
                     containerStyle={styles.button}
-                    key={item.quizOptionId}
+                    key={item.optionId}
                     title={item.text}
                     isActive
                     onPress={() => {
-                      onPressItem(item.quizOptionId);
+                      onPressItem(item.optionId);
                     }}
                   />
                 ))}

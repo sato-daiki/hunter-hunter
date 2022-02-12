@@ -1,11 +1,10 @@
 export type Option = {
-  quizOptionId: string;
+  optionId: string;
   text: string;
 };
 
 export type Quiz = {
   quizId: string;
   question: string;
-  correctOptionId: string;
   options: Option[];
 };
