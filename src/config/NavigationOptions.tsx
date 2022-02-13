@@ -1,8 +1,8 @@
-import { StackNavigationOptions } from '@react-navigation/stack';
+import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 
 import { baseColor, commonText, textColor } from '@/styles/common';
 
-export const DefaultNavigationOptions: StackNavigationOptions = {
+export const DefaultNavigationOptions: NativeStackNavigationOptions = {
   headerStyle: {
     backgroundColor: baseColor,
   },

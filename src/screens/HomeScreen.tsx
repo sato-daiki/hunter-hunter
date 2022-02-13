@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, Linking } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -48,20 +48,19 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   }, [showAdReward]);
 
   const onPressContant = useCallback(() => {
-    navigation.navigate('WebView', {
-      uri: 'https://forms.gle/NYgfxBoEJACxnKbE6',
-      title: 'お問い合わせ',
-    });
-  }, [navigation]);
+    Linking.openURL(
+      'https://docs.google.com/forms/d/e/1FAIpQLSdCnvFKtO0AMFM6oBP9g2MmJ_9P7_ELUPJUuSrYyNtAZcx_oA/viewform?usp=sf_link',
+    );
+  }, []);
 
   return (
     <Layout enableSafeArea>
       <View style={styles.container}>
         <LoadingModal visible={isLoading} text='loading' />
         <View style={styles.header}>
-          {hightScore !== null && (
-            <Text style={styles.hightScore}>ハイスコア {hightScore}点</Text>
-          )}
+          <Text style={styles.hightScore}>
+            {hightScore !== null && `ハイスコア ${hightScore}点`}
+          </Text>
           <View style={styles.jennyContainer}>
             <Image source={Jenny} style={styles.jennyIcon} />
             <Text style={styles.jennyText}>{jenny}ジェニー</Text>

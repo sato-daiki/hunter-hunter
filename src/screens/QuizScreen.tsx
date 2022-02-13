@@ -1,12 +1,5 @@
 import React, { useCallback, useLayoutEffect, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Animated,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import arrayShuffle from 'array-shuffle';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
@@ -18,14 +11,12 @@ import CommonButton from '@/components/molecules/CommonButton';
 import { RootStackParamList } from '@/navigations/RootNavigation';
 import Loading from '@/components/atoms/Loading';
 import { Quiz } from '@/types/quiz';
-import { useOption } from '@/screens/hooks/useQuiz';
 import { NUMBER_QUESTION } from '@/config/common';
 import WhiteBoard from '@/components/molecules/WhiteBoard';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { User } from '@/types/user';
 import { quizAll } from '@assets/quizAll';
-import SubButton from '@/components/molecules/SubButton';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Quiz'>;
 
@@ -43,7 +34,6 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
   const [quiz, setQuiz] = useState<Quiz[]>([]);
   const [key, setKey] = useState('');
 
-  const { fadeAnim } = useOption();
   const { jenny, hightScore } = userState;
 
   useEffect(() => {
@@ -57,14 +47,14 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
   const onPressLeft = useCallback(() => {
     Alert.alert('注意', '本当に終了してもよろしいですか？', [
       {
+        text: 'キャンセル',
+        style: 'cancel',
+      },
+      {
         text: 'はい',
         onPress: () => {
           navigation.goBack();
         },
-      },
-      {
-        text: 'キャンセル',
-        style: 'cancel',
       },
     ]);
   }, [navigation]);
@@ -89,6 +79,7 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
         newScore += 1;
         setScore(newScore);
       }
+      console.log('newScore', newScore);
 
       const nextNumber = number + 1;
       if (nextNumber !== NUMBER_QUESTION) {
@@ -127,9 +118,9 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
                 <CountdownCircleTimer
                   isPlaying
                   key={key}
-                  size={40}
-                  strokeWidth={6}
-                  duration={15}
+                  size={30}
+                  strokeWidth={3}
+                  duration={20}
                   colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                   colorsTime={[15, 10, 5, 0]}
                   onComplete={onComplete}
@@ -143,12 +134,12 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
             <WhiteBoard>
               <Text style={styles.questionText}>{quiz[number].question}</Text>
             </WhiteBoard>
-            <Animated.View style={{ opacity: fadeAnim }}>
+            <View>
               {quiz[number].options &&
-                arrayShuffle(quiz[number].options).map((item) => (
+                arrayShuffle(quiz[number].options).map((item, index) => (
                   <CommonButton
                     containerStyle={styles.button}
-                    key={item.optionId}
+                    key={index}
                     title={item.text}
                     isActive
                     isSquere
@@ -157,7 +148,7 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
                     }}
                   />
                 ))}
-            </Animated.View>
+            </View>
           </View>
         )}
       </View>
@@ -183,10 +174,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 58,
+    height: 40,
   },
   number: {
-    ...commonText.number,
+    ...commonText.title,
     color: textColor,
     textAlign: 'right',
   },

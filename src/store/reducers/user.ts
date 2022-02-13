@@ -10,7 +10,7 @@ export default (state = initialState, action: any): User => {
   switch (action.type) {
     case INIT_USER:
       return {
-        jenny: 10,
+        jenny: 2,
         hightScore: null,
       };
     case UPDATE_JENNY:

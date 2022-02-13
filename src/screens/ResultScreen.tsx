@@ -34,7 +34,7 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
   const onPressTweet = useCallback(async () => {
     try {
       const result = await Share.share({
-        message: `ハンター検定の結果${route.params.score}点${messege.title}${messege.description} ${APP_URL}`,
+        message: `HUNTER検定の結果${route.params.score}点${messege.title}${messege.description} ${APP_URL}`,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -90,18 +90,18 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   title: {
-    ...commonText.lllTitle,
+    ...commonText.lTitle,
     color: '#fff',
     fontWeight: 'bold',
-    alignSelf: 'center',
-    marginBottom: 8,
+    textAlign: 'center',
+    marginBottom: 10,
   },
   description: {
     ...commonText.title,
     color: '#fff',
     fontWeight: 'bold',
     alignSelf: 'center',
-    marginBottom: 16,
+    marginBottom: 30,
   },
   score: {
     ...commonText.lllTitle,

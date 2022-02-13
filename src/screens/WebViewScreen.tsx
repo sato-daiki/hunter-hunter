@@ -1,8 +1,8 @@
-import React, {useCallback, useLayoutEffect} from 'react';
-import {ActivityIndicator, View, StyleSheet} from 'react-native';
-import {WebView} from 'react-native-webview';
-import {RouteProp} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
+import React, { useCallback, useLayoutEffect } from 'react';
+import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import { WebView } from 'react-native-webview';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 export interface WebViewNavParams {
   uri?: string;
@@ -11,7 +11,7 @@ export interface WebViewNavParams {
 
 type Props = {
   navigation: StackNavigationProp<any>;
-  route: RouteProp<{screen: WebViewNavParams}, 'screen'>;
+  route: RouteProp<{ screen: WebViewNavParams }, 'screen'>;
 };
 
 const styles = StyleSheet.create({
@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
 
 export const WebViewLoading = () => (
   <View style={styles.container}>
-    <ActivityIndicator size="large" />
+    <ActivityIndicator size='large' />
   </View>
 );
 
-export const WebViewScreen: React.FC<Props> = ({navigation, route}) => {
+export const WebViewScreen: React.FC<Props> = ({ navigation, route }) => {
   const uri = route.params.uri;
 
   React.useLayoutEffect(() => {
@@ -61,7 +61,8 @@ export const WebViewScreen: React.FC<Props> = ({navigation, route}) => {
   return (
     <WebView
       ref={webView}
-      source={{uri}}
+      originWhitelist={['intent://']}
+      source={{ uri }}
       renderLoading={WebViewLoading}
       startInLoadingState
       allowsBackForwardNavigationGestures
