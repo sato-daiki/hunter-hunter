@@ -9,11 +9,13 @@ const WhiteBoard: React.FC = ({ children }) => {
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 3,
+    height: 300,
+    borderWidth: 5,
     borderColor: '#000',
     backgroundColor: subColor,
     padding: 10,
     marginBottom: 20,
+    justifyContent: 'center',
   },
 });
 

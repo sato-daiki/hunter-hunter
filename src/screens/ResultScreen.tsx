@@ -9,7 +9,8 @@ import { baseColor, commonText } from '@/styles/common';
 import { RootStackParamList } from '@/navigations/RootNavigation';
 import WhiteBoard from '@/components/molecules/WhiteBoard';
 import { RouteProp } from '@react-navigation/native';
-import { APP_URL } from '@/config/common';
+import { APP_URL, getMessage } from '@/config/common';
+import { Message } from '@/types/message';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Result'>;
 
@@ -19,12 +20,8 @@ type Props = {
 };
 
 const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
-  const messege = useMemo(() => {
-    if (route.params.score > 0) {
-      ('おぬしもやるの');
-    } else {
-      return 'クソが';
-    }
+  const messege: Message = useMemo(() => {
+    return getMessage(route.params.score);
   }, [route.params.score]);
 
   const onPressStart = useCallback(async () => {
@@ -37,7 +34,7 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
   const onPressTweet = useCallback(async () => {
     try {
       const result = await Share.share({
-        message: `ハンター検定：${messege} URL: ${APP_URL}`,
+        message: `ハンター検定の結果${route.params.score}点${messege.title}${messege.description} ${APP_URL}`,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -51,15 +48,15 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
     } catch (error: any) {
       alert(error.message);
     }
-  }, [messege]);
+  }, [messege.description, messege.title, route.params.score]);
 
   return (
     <Layout>
       <View style={styles.container}>
         <WhiteBoard>
-          <Text style={styles.result}>結果</Text>
+          <Text style={styles.title}>{messege.title}</Text>
+          <Text style={styles.description}>{messege.description}</Text>
           <Text style={styles.score}>{route.params.score} 点</Text>
-          <Text style={styles.description}>{messege}</Text>
         </WhiteBoard>
         <CommonButton
           containerStyle={styles.textButton}
@@ -92,16 +89,25 @@ const styles = StyleSheet.create({
     color: '#fff',
     alignSelf: 'center',
   },
-  score: {
+  title: {
     ...commonText.lllTitle,
     color: '#fff',
+    fontWeight: 'bold',
     alignSelf: 'center',
-    marginBottom: 20,
+    marginBottom: 8,
   },
   description: {
     ...commonText.title,
     color: '#fff',
+    fontWeight: 'bold',
     alignSelf: 'center',
+    marginBottom: 16,
+  },
+  score: {
+    ...commonText.lllTitle,
+    color: '#fff',
+    alignSelf: 'center',
+    fontWeight: 'bold',
   },
   textButton: {
     marginBottom: 11,

@@ -1,4 +1,4 @@
 export type User = {
-  jenny: number;
+  jenny: number | null;
   hightScore: number | null;
 };

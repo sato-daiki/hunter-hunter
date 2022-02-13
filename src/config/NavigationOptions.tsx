@@ -1,6 +1,6 @@
 import { StackNavigationOptions } from '@react-navigation/stack';
 
-import { baseColor, commonText } from '@/styles/common';
+import { baseColor, commonText, textColor } from '@/styles/common';
 
 export const DefaultNavigationOptions: StackNavigationOptions = {
   headerStyle: {
@@ -9,5 +9,6 @@ export const DefaultNavigationOptions: StackNavigationOptions = {
   headerTitleAlign: 'center',
   headerTitleStyle: {
     ...commonText.title,
+    color: textColor,
   },
 };

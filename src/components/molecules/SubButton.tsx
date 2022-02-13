@@ -7,10 +7,15 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import { commonText, textGrayColor } from '@/styles/common';
+import {
+  baseColor,
+  commonText,
+  mainColor,
+  textGrayColor,
+} from '@/styles/common';
 import Button from '../atoms/Button';
 
-export type CommonButtonProps = {
+export type SubButtonProps = {
   title: string;
   containerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
@@ -19,7 +24,7 @@ export type CommonButtonProps = {
   onPress: () => void;
 };
 
-const CommonButton: React.FC<CommonButtonProps> = ({
+const SubButton: React.FC<SubButtonProps> = ({
   containerStyle,
   textStyle,
   isActive,
@@ -29,7 +34,7 @@ const CommonButton: React.FC<CommonButtonProps> = ({
 }) => {
   return (
     <Button
-      containerStyle={containerStyle}
+      containerStyle={[styles.container, containerStyle]}
       isActive={isActive}
       isSquere={isSquere}
       onPress={onPress}
@@ -48,10 +53,15 @@ const CommonButton: React.FC<CommonButtonProps> = ({
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: baseColor,
+    borderColor: mainColor,
+    borderWidth: 1,
+  },
   text: {
-    color: '#fff',
+    color: mainColor,
     fontWeight: 'bold',
   },
 });
 
-export default CommonButton;
+export default SubButton;

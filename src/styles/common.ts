@@ -29,6 +29,16 @@ export const commonText = StyleSheet.create({
     lineHeight: 40,
     color: mainColor,
   },
+  llTitle: {
+    fontSize: 28,
+    lineHeight: 36,
+    color: mainColor,
+  },
+  lTitle: {
+    fontSize: 24,
+    lineHeight: 32,
+    color: mainColor,
+  },
   title: {
     fontSize: 16,
     lineHeight: 24,

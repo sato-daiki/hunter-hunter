@@ -5,11 +5,13 @@ import HomeScreen from '@/screens/HomeScreen';
 import QuizScreen from '@/screens/QuizScreen';
 import ResultScreen from '@/screens/ResultScreen';
 import { DefaultNavigationOptions } from '@/config/NavigationOptions';
+import { WebViewNavParams, WebViewScreen } from '@/screens/WebViewScreen';
 
 export type RootStackParamList = {
   Home: undefined;
   Quiz: undefined;
   Result: { score: number };
+  WebView: WebViewNavParams;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -44,6 +46,7 @@ const RootNavigation = () => {
           headerLeft: () => null,
         }}
       />
+      <Stack.Screen name='WebView' component={WebViewScreen} />
     </Stack.Navigator>
   );
 };

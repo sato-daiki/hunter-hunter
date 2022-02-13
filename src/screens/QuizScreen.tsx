@@ -1,10 +1,18 @@
-import React, { useCallback, useState } from 'react';
-import { StyleSheet, View, Text, Animated } from 'react-native';
+import React, { useCallback, useLayoutEffect, useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Animated,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import arrayShuffle from 'array-shuffle';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 import * as userActions from '@/store/actions/user';
-import { baseColor, commonText, textGrayColor } from '@/styles/common';
+import { baseColor, commonText, textColor } from '@/styles/common';
 import { Layout } from '@/components/atoms';
 import CommonButton from '@/components/molecules/CommonButton';
 import { RootStackParamList } from '@/navigations/RootNavigation';
@@ -17,6 +25,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { User } from '@/types/user';
 import { quizAll } from '@assets/quizAll';
+import SubButton from '@/components/molecules/SubButton';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Quiz'>;
 
@@ -32,9 +41,10 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
   const [number, setNumber] = useState(0);
   const [score, setScore] = useState(0);
   const [quiz, setQuiz] = useState<Quiz[]>([]);
+  const [key, setKey] = useState('');
 
   const { fadeAnim } = useOption();
-  const { hightScore } = userState;
+  const { jenny, hightScore } = userState;
 
   useEffect(() => {
     const quizShuffle = arrayShuffle(quizAll);
@@ -43,6 +53,34 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
     setIsLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const onPressLeft = useCallback(() => {
+    Alert.alert('注意', '本当に終了してもよろしいですか？', [
+      {
+        text: 'はい',
+        onPress: () => {
+          navigation.goBack();
+        },
+      },
+      {
+        text: 'キャンセル',
+        style: 'cancel',
+      },
+    ]);
+  }, [navigation]);
+
+  /**
+   * ヘッダーに初期値設定
+   */
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity onPress={onPressLeft}>
+          <Text style={styles.quit}>やめる</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, onPressLeft]);
 
   const onPressItem = useCallback(
     async (optionId: string) => {
@@ -53,18 +91,26 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
       }
 
       const nextNumber = number + 1;
-      setNumber(nextNumber);
-
-      if (nextNumber === NUMBER_QUESTION - 1) {
+      if (nextNumber !== NUMBER_QUESTION) {
+        setKey(quiz[number].quizId);
+        setNumber(nextNumber);
+      } else {
         if (!hightScore || newScore > hightScore) {
           await dispatch(userActions.updateHightScore(newScore));
         }
-        // 0始まりのため-1している
+
+        if (newScore >= 90) {
+          await dispatch(userActions.updateJenny(jenny ? jenny + 1 : 1));
+        }
         navigation.navigate('Result', { score: newScore });
       }
     },
-    [dispatch, hightScore, navigation, number, score],
+    [dispatch, hightScore, jenny, navigation, number, quiz, score],
   );
+
+  const onComplete = useCallback(() => {
+    onPressItem('99');
+  }, [onPressItem]);
 
   return (
     <Layout>
@@ -73,9 +119,27 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
           <Loading />
         ) : (
           <View style={styles.main}>
-            <Text style={styles.number}>
-              {number} / {NUMBER_QUESTION}
-            </Text>
+            <View style={styles.header}>
+              <Text style={styles.number}>
+                {number + 1} / {NUMBER_QUESTION}
+              </Text>
+              <View style={styles.timer}>
+                <CountdownCircleTimer
+                  isPlaying
+                  key={key}
+                  size={40}
+                  strokeWidth={6}
+                  duration={15}
+                  colors={['#004777', '#F7B801', '#A30000', '#A30000']}
+                  colorsTime={[15, 10, 5, 0]}
+                  onComplete={onComplete}
+                >
+                  {({ remainingTime }) => (
+                    <Text style={styles.remainingTime}>{remainingTime}</Text>
+                  )}
+                </CountdownCircleTimer>
+              </View>
+            </View>
             <WhiteBoard>
               <Text style={styles.questionText}>{quiz[number].question}</Text>
             </WhiteBoard>
@@ -87,6 +151,7 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
                     key={item.optionId}
                     title={item.text}
                     isActive
+                    isSquere
                     onPress={() => {
                       onPressItem(item.optionId);
                     }}
@@ -105,20 +170,38 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: baseColor,
     paddingHorizontal: 20,
-    paddingVertical: 16,
+  },
+  quit: {
+    ...commonText.description,
+    color: '#000',
+    paddingHorizontal: 10,
   },
   main: {
     flex: 1,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 58,
+  },
   number: {
     ...commonText.number,
-    color: textGrayColor,
+    color: textColor,
     textAlign: 'right',
-    marginBottom: 8,
+  },
+  timer: {
+    position: 'absolute',
+    right: 0,
+  },
+  remainingTime: {
+    ...commonText.description,
+    color: textColor,
   },
   questionText: {
     ...commonText.title,
     color: '#fff',
+    fontWeight: 'bold',
   },
   button: {
     marginBottom: 10,
