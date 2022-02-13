@@ -2,7 +2,7 @@
   "expo": {
     "name": "hunter",
     "slug": "hunter",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -14,9 +14,7 @@
       "enabled": true,
       "fallbackToCacheTimeout": 10000
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "config": {
@@ -40,7 +38,8 @@
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-0770181536572634~7391018240"
       },
-      "package": "app.manqui.hunter"
+      "package": "app.manqui.hunter",
+      "permissions": []
     },
     "web": {
       "favicon": "./assets/favicon.png"
