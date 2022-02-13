@@ -14,12 +14,23 @@
       "enabled": true,
       "fallbackToCacheTimeout": 10000
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-0770181536572634~8923591763"
-      }
+      },
+      "infoPlist": {
+        "NSUserTrackingUsageDescription": "広告の最適化のために使用します",
+        "SKAdNetworkItems": [
+          {
+            "SKAdNetworkIdentifier": "cstr6suwn9.skadnetwork"
+          }
+        ]
+      },
+      "bundleIdentifier": "app.manqui.hunter"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,7 +39,8 @@
       },
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-0770181536572634~7391018240"
-      }
+      },
+      "package": "app.manqui.hunter"
     },
     "web": {
       "favicon": "./assets/favicon.png"

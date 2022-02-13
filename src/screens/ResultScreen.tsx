@@ -34,7 +34,9 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
   const onPressTweet = useCallback(async () => {
     try {
       const result = await Share.share({
-        message: `HUNTER検定の結果${route.params.score}点${messege.title}${messege.description} ${APP_URL}`,
+        message: `HUNTER検定の結果${route.params.score * 2}点${messege.title}${
+          messege.description
+        } ${APP_URL}`,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -56,7 +58,7 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
         <WhiteBoard>
           <Text style={styles.title}>{messege.title}</Text>
           <Text style={styles.description}>{messege.description}</Text>
-          <Text style={styles.score}>{route.params.score} 点</Text>
+          <Text style={styles.score}>{route.params.score * 2} 点</Text>
         </WhiteBoard>
         <CommonButton
           containerStyle={styles.textButton}
