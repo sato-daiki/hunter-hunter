@@ -2,7 +2,7 @@
   "expo": {
     "name": "hunter",
     "slug": "hunter",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -20,17 +20,12 @@
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-0770181536572634~8923591763"
       },
-      "infoPlist": {
-        "NSUserTrackingUsageDescription": "広告の最適化のために使用します",
-        "SKAdNetworkItems": [
-          {
-            "SKAdNetworkIdentifier": "cstr6suwn9.skadnetwork"
-          }
-        ]
-      },
-      "bundleIdentifier": "app.manqui.hunter"
+      "bundleIdentifier": "app.manqui.hunter",
+      "buildNumber": 1010300
     },
     "android": {
+      "package": "app.manqui.hunter",
+      "versionCode": 1010300,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -38,7 +33,6 @@
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-0770181536572634~7391018240"
       },
-      "package": "app.manqui.hunter",
       "permissions": []
     },
     "web": {
