@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "hunter",
+    "name": "Hunter検定",
     "slug": "hunter",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -24,11 +24,11 @@
         "NSUserTrackingUsageDescription": "広告の最適化のために使用します"
       },
       "bundleIdentifier": "app.manqui.hunter",
-      "buildNumber": "1010500"
+      "buildNumber": "1010600"
     },
     "android": {
       "package": "app.manqui.hunter",
-      "versionCode": 1010500,
+      "versionCode": 1010600,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
