@@ -1,10 +1,5 @@
 import { useCallback, useState, useEffect } from 'react';
-import {
-  AdMobRewarded,
-  setTestDeviceIDAsync,
-  getPermissionsAsync,
-  requestPermissionsAsync,
-} from 'expo-ads-admob';
+import { AdMobRewarded, setTestDeviceIDAsync } from 'expo-ads-admob';
 import * as userActions from '@/store/actions/user';
 
 import { Platform } from 'react-native';
@@ -18,7 +13,6 @@ const ANDROID_AD_UNIT_ID = 'ca-app-pub-0770181536572634/2549755100';
 export const useAdMobRewarded = () => {
   const dispatch: any = useDispatch();
   const userState: User = useSelector((state: any) => state.user);
-  const [isPermission, setIsPermission] = useState(false);
   const { jenny } = userState;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -32,12 +26,12 @@ export const useAdMobRewarded = () => {
         'rewardedVideoDidFailToLoad',
         rewardedVideoDidFailToLoad,
       );
-      const { status } = await requestPermissionsAsync();
-      if (status !== 'granted') {
-        setIsPermission(false);
-      } else {
-        setIsPermission(true);
-      }
+      // const { status } = await requestPermissionsAsync();
+      // if (status !== 'granted') {
+      //   setIsPermission(false);
+      // } else {
+      //   setIsPermission(true);
+      // }
     };
 
     f();
@@ -68,16 +62,14 @@ export const useAdMobRewarded = () => {
       await AdMobRewarded.setAdUnitID(
         Platform.OS === 'ios' ? IOS_AD_UNIT_ID : ANDROID_AD_UNIT_ID,
       );
-      await AdMobRewarded.requestAdAsync({
-        servePersonalizedAds: isPermission,
-      });
+      await AdMobRewarded.requestAdAsync();
       await AdMobRewarded.showAdAsync();
     } catch (err: any) {
       console.warn(err);
       rewardedVideoDidFailToLoad();
     }
     setIsLoading(false);
-  }, [isPermission, rewardedVideoDidFailToLoad]);
+  }, [rewardedVideoDidFailToLoad]);
 
   return {
     isLoading,
