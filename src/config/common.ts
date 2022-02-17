@@ -1,7 +1,8 @@
 import { Message } from '@/types/message';
 
 export const NUMBER_QUESTION = 50;
-export const APP_URL = 'iOS:https://itunes.apple.com/jp/app/id1609851189';
+export const APP_URL =
+  'iOS:https://itunes.apple.com/jp/app/id1609851189 Android:https://play.google.com/store/apps/details?id=app.manqui.hunter';
 
 const SCORE_MESSAGE_0: Message = {
   title: '『不真面目野郎』',
