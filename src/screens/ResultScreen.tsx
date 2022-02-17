@@ -71,7 +71,7 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
           containerStyle={styles.textButton}
           isActive
           isSquere
-          title={'ツイートする'}
+          title={'シェアする'}
           onPress={onPressTweet}
         />
       </View>
