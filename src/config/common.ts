@@ -1,7 +1,7 @@
 import { Message } from '@/types/message';
 
 export const NUMBER_QUESTION = 50;
-export const APP_URL = 'yahoo:co.jp';
+export const APP_URL = 'iOS:https://00m.in/wPbFd';
 
 const SCORE_MESSAGE_0: Message = {
   title: '『不真面目野郎』',
