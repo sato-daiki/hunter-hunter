@@ -1,5 +1,10 @@
 import { useCallback, useState, useEffect } from 'react';
-import { AdMobRewarded, setTestDeviceIDAsync } from 'expo-ads-admob';
+import {
+  AdMobRewarded,
+  setTestDeviceIDAsync,
+  getPermissionsAsync,
+  requestPermissionsAsync,
+} from 'expo-ads-admob';
 import * as userActions from '@/store/actions/user';
 
 import { Platform } from 'react-native';
@@ -13,6 +18,7 @@ const ANDROID_AD_UNIT_ID = 'ca-app-pub-0770181536572634/2549755100';
 export const useAdMobRewarded = () => {
   const dispatch: any = useDispatch();
   const userState: User = useSelector((state: any) => state.user);
+  const [isPermission, setIsPermission] = useState(false);
   const { jenny } = userState;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +32,12 @@ export const useAdMobRewarded = () => {
         'rewardedVideoDidFailToLoad',
         rewardedVideoDidFailToLoad,
       );
+      const { status } = await requestPermissionsAsync();
+      if (status !== 'granted') {
+        setIsPermission(false);
+      } else {
+        setIsPermission(true);
+      }
     };
 
     f();
@@ -38,7 +50,7 @@ export const useAdMobRewarded = () => {
   const rewardedVideoUserDidEarnReward = useCallback(async () => {
     console.log('rewardedVideoUserDidEarnReward');
     // 広告をみた人が実行できる処理
-    await dispatch(userActions.updateJenny(jenny + 1));
+    await dispatch(userActions.updateJenny(jenny ? jenny + 1 : 1));
   }, [jenny, dispatch]);
 
   const rewardedVideoDidFailToLoad = useCallback(() => {
@@ -56,14 +68,16 @@ export const useAdMobRewarded = () => {
       await AdMobRewarded.setAdUnitID(
         Platform.OS === 'ios' ? IOS_AD_UNIT_ID : ANDROID_AD_UNIT_ID,
       );
-      await AdMobRewarded.requestAdAsync();
+      await AdMobRewarded.requestAdAsync({
+        servePersonalizedAds: isPermission,
+      });
       await AdMobRewarded.showAdAsync();
     } catch (err: any) {
       console.warn(err);
       rewardedVideoDidFailToLoad();
     }
     setIsLoading(false);
-  }, [rewardedVideoDidFailToLoad]);
+  }, [isPermission, rewardedVideoDidFailToLoad]);
 
   return {
     isLoading,

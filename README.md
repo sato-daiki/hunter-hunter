@@ -8,3 +8,5 @@
 4.node csv.ts を実行すると、outputs フォルダに list.json ファイルがあるのでコピーする
 5.hunter-hunter の assets.quizAll.tsx に貼り付ける
 ```
+
+eas build --platform all
