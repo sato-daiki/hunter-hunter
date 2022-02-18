@@ -1,6 +1,5 @@
 import { useCallback, useState, useEffect } from 'react';
 import { AdMobRewarded, setTestDeviceIDAsync } from 'expo-ads-admob';
-import * as userActions from '@/store/actions/user';
 
 import { Platform } from 'react-native';
 import { commonAlert } from '@/utils/alert';
@@ -10,7 +9,11 @@ import { User } from '@/types/user';
 const IOS_AD_UNIT_ID = 'ca-app-pub-0770181536572634/2216575001';
 const ANDROID_AD_UNIT_ID = 'ca-app-pub-0770181536572634/2549755100';
 
-export const useAdMobRewarded = () => {
+type Props = {
+  afterEarn: () => void;
+};
+
+export const useAdMobRewarded = ({ afterEarn }: Props) => {
   const dispatch: any = useDispatch();
   const userState: User = useSelector((state: any) => state.user);
   const { jenny } = userState;
@@ -26,12 +29,6 @@ export const useAdMobRewarded = () => {
         'rewardedVideoDidFailToLoad',
         rewardedVideoDidFailToLoad,
       );
-      // const { status } = await requestPermissionsAsync();
-      // if (status !== 'granted') {
-      //   setIsPermission(false);
-      // } else {
-      //   setIsPermission(true);
-      // }
     };
 
     f();
@@ -42,10 +39,10 @@ export const useAdMobRewarded = () => {
   }, []);
 
   const rewardedVideoUserDidEarnReward = useCallback(async () => {
-    console.log('rewardedVideoUserDidEarnReward');
     // 広告をみた人が実行できる処理
-    await dispatch(userActions.updateJenny(jenny ? jenny + 1 : 1));
-  }, [jenny, dispatch]);
+    console.log('rewardedVideoUserDidEarnReward');
+    afterEarn();
+  }, [afterEarn]);
 
   const rewardedVideoDidFailToLoad = useCallback(() => {
     commonAlert({

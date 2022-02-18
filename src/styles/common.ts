@@ -4,6 +4,7 @@ export const baseColor = '#F5F5F5';
 export const textColor = '#3E3E3E';
 export const mainColor = '#840303';
 export const subColor = '#2A3A3A';
+export const borderLightColor = '#CCCCCC';
 
 export const textGrayColor = '#888888';
 export const textWhiteColor = '#F5F5F5';

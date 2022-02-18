@@ -37,7 +37,8 @@
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-0770181536572634~7391018240"
       },
-      "permissions": []
+      "permissions": [],
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=app.manqui.hunter"
     },
     "web": {
       "favicon": "./assets/favicon.png"

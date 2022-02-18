@@ -11,6 +11,9 @@ import WhiteBoard from '@/components/molecules/WhiteBoard';
 import { RouteProp } from '@react-navigation/native';
 import { APP_URL, getMessage } from '@/config/common';
 import { Message } from '@/types/message';
+import SubButton from '@/components/molecules/SubButton';
+import { useAdMobRewarded } from './hooks/useAdMobRewarded';
+import LoadingModal from '@/components/atoms/LoadingModal';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Result'>;
 
@@ -24,14 +27,14 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
     return getMessage(route.params.score);
   }, [route.params.score]);
 
-  const onPressStart = useCallback(async () => {
+  const onPressHome = useCallback(async () => {
     navigation.navigate('Home');
     if (await StoreReview.hasAction()) {
       await StoreReview.requestReview();
     }
   }, [navigation]);
 
-  const onPressTweet = useCallback(async () => {
+  const onPressShare = useCallback(async () => {
     try {
       const result = await Share.share({
         message: `HUNTER検定の結果${route.params.score * 2}点${messege.title}${
@@ -52,27 +55,56 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
     }
   }, [messege.description, messege.title, route.params.score]);
 
+  const goToResultDetail = useCallback(async () => {
+    navigation.navigate('ResultDetail', {
+      quiz: route.params.quiz,
+      answerOptions: route.params.answerOptions,
+    });
+  }, [navigation, route.params.answerOptions, route.params.quiz]);
+
+  const afterEarn = useCallback(async () => {
+    goToResultDetail();
+  }, [goToResultDetail]);
+
+  const { isLoading, showAdReward } = useAdMobRewarded({ afterEarn });
+
   return (
     <Layout>
       <View style={styles.container}>
+        <LoadingModal visible={isLoading} text='loading' />
         <WhiteBoard>
           <Text style={styles.title}>{messege.title}</Text>
           <Text style={styles.description}>{messege.description}</Text>
           <Text style={styles.score}>{route.params.score * 2} 点</Text>
         </WhiteBoard>
         <CommonButton
-          containerStyle={styles.textButton}
+          containerStyle={styles.mainTextButton}
           isActive
           isSquere
-          title={'ホームへ'}
-          onPress={onPressStart}
+          title={
+            route.params.score < 90
+              ? '結果を見る（動画広告をみた後に見れます）'
+              : '結果を見る'
+          }
+          onPress={
+            route.params.score < 90 && !__DEV__
+              ? showAdReward
+              : goToResultDetail
+          }
         />
-        <CommonButton
+        <SubButton
           containerStyle={styles.textButton}
           isActive
           isSquere
           title={'シェアする'}
-          onPress={onPressTweet}
+          onPress={onPressShare}
+        />
+        <SubButton
+          containerStyle={styles.textButton}
+          isActive
+          isSquere
+          title={'ホームへ'}
+          onPress={onPressHome}
         />
       </View>
     </Layout>
@@ -111,8 +143,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontWeight: 'bold',
   },
+  mainTextButton: {
+    marginBottom: 10,
+  },
   textButton: {
-    marginBottom: 11,
+    marginBottom: 10,
   },
 });
 

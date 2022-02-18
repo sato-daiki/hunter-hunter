@@ -1,5 +1,6 @@
 import { Message } from '@/types/message';
 
+export const TIMEOUT_OPTION_ID = '99';
 export const NUMBER_QUESTION = 50;
 export const APP_URL =
   'iOS:https://itunes.apple.com/jp/app/id1609851189 Android:https://play.google.com/store/apps/details?id=app.manqui.hunter';

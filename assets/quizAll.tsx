@@ -2106,8 +2106,8 @@ export const quizAll: Quiz[] = [
       { optionId: '0', text: '1' },
       { optionId: '1', text: '3' },
       { optionId: '2', text: '5' },
-      { optionId: '3', text: '' },
-      { optionId: '4', text: '7' },
+      { optionId: '3', text: '7' },
+      { optionId: '4', text: '9' },
     ],
   },
   {

@@ -1,8 +1,15 @@
-import React, { useCallback, useLayoutEffect, useState } from 'react';
+import React, {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import arrayShuffle from 'array-shuffle';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as userActions from '@/store/actions/user';
 import { baseColor, commonText, textColor } from '@/styles/common';
@@ -10,11 +17,9 @@ import { Layout } from '@/components/atoms';
 import CommonButton from '@/components/molecules/CommonButton';
 import { RootStackParamList } from '@/navigations/RootNavigation';
 import Loading from '@/components/atoms/Loading';
-import { Quiz } from '@/types/quiz';
-import { NUMBER_QUESTION } from '@/config/common';
+import { Quiz, Option } from '@/types/quiz';
+import { NUMBER_QUESTION, TIMEOUT_OPTION_ID } from '@/config/common';
 import WhiteBoard from '@/components/molecules/WhiteBoard';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { User } from '@/types/user';
 import { quizAll } from '@assets/quizAll';
 
@@ -30,9 +35,11 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [number, setNumber] = useState(0);
-  const [score, setScore] = useState(0);
   const [quiz, setQuiz] = useState<Quiz[]>([]);
   const [key, setKey] = useState('');
+
+  const score = useRef<number>(0);
+  const answerOptions = useRef<Option[]>([]);
 
   const { jenny, hightScore } = userState;
 
@@ -73,34 +80,35 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
   }, [navigation, onPressLeft]);
 
   const onPressItem = useCallback(
-    async (optionId: string) => {
-      let newScore = score;
-      if (optionId === '0') {
-        newScore += 1;
-        setScore(newScore);
+    async (option: Option) => {
+      if (option.optionId === '0') {
+        score.current = score.current + 1;
       }
-      console.log('newScore', newScore);
-
+      answerOptions.current.push(option);
       const nextNumber = number + 1;
       if (nextNumber !== NUMBER_QUESTION) {
         setKey(quiz[number].quizId);
         setNumber(nextNumber);
       } else {
-        if (!hightScore || newScore > hightScore) {
-          await dispatch(userActions.updateHightScore(newScore));
+        setIsLoading(true);
+        if (!hightScore || score.current > hightScore) {
+          await dispatch(userActions.updateHightScore(score.current));
         }
-
-        if (newScore >= 90) {
+        if (score.current >= 90) {
           await dispatch(userActions.updateJenny(jenny ? jenny + 1 : 1));
         }
-        navigation.navigate('Result', { score: newScore });
+        navigation.navigate('Result', {
+          score: score.current,
+          quiz,
+          answerOptions: answerOptions.current,
+        });
       }
     },
-    [dispatch, hightScore, jenny, navigation, number, quiz, score],
+    [dispatch, hightScore, jenny, navigation, number, quiz],
   );
 
   const onComplete = useCallback(() => {
-    onPressItem('99');
+    onPressItem({ optionId: TIMEOUT_OPTION_ID, text: '' });
   }, [onPressItem]);
 
   return (
@@ -144,7 +152,7 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
                     isActive
                     isSquere
                     onPress={() => {
-                      onPressItem(item.optionId);
+                      onPressItem(item);
                     }}
                   />
                 ))}

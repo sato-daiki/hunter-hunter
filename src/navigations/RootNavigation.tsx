@@ -6,11 +6,14 @@ import QuizScreen from '@/screens/QuizScreen';
 import ResultScreen from '@/screens/ResultScreen';
 import { DefaultNavigationOptions } from '@/config/NavigationOptions';
 import { WebViewNavParams, WebViewScreen } from '@/screens/WebViewScreen';
+import { Quiz, Option } from '@/types/quiz';
+import ResultDetailScreen from '@/screens/ResultDetailScreen';
 
 export type RootStackParamList = {
   Home: undefined;
   Quiz: undefined;
-  Result: { score: number };
+  Result: { score: number; quiz: Quiz[]; answerOptions: Option[] };
+  ResultDetail: { quiz: Quiz[]; answerOptions: Option[] };
   WebView: WebViewNavParams;
 };
 
@@ -43,6 +46,14 @@ const RootNavigation = () => {
         component={ResultScreen}
         options={{
           title: '結果発表',
+          headerLeft: () => null,
+        }}
+      />
+      <Stack.Screen
+        name='ResultDetail'
+        component={ResultDetailScreen}
+        options={{
+          title: '詳細',
           headerLeft: () => null,
         }}
       />

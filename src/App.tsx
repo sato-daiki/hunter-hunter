@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
-import BottomBanner from '@/features/BottomBanner/BottomBanner';
+import BottomBanner from '@/features/BottomBanner';
 import RootNavigation from '@/navigations/RootNavigation';
 import userReducer from '@/store/reducers/user';
 import { PersistGate } from 'redux-persist/integration/react';

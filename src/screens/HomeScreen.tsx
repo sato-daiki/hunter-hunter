@@ -24,7 +24,12 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch: any = useDispatch();
   const userState: User = useSelector((state: any) => state.user);
   const { jenny, hightScore } = userState;
-  const { isLoading, showAdReward } = useAdMobRewarded();
+
+  const afterEarn = useCallback(async () => {
+    await dispatch(userActions.updateJenny(jenny ? jenny + 1 : 1));
+  }, [jenny, dispatch]);
+
+  const { isLoading, showAdReward } = useAdMobRewarded({ afterEarn });
 
   useEffect(() => {
     const f = async () => {
@@ -37,10 +42,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   }, []);
 
   const onPressStart = useCallback(async () => {
-    if (jenny) {
-      await dispatch(userActions.updateJenny(jenny - 1));
-      navigation.navigate('Quiz');
-    }
+    await dispatch(userActions.updateJenny(jenny ? jenny - 1 : 0));
+    navigation.navigate('Quiz');
   }, [jenny, dispatch, navigation]);
 
   const onPressAds = useCallback(() => {
@@ -71,7 +74,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
           <Text style={styles.title}>この年で挑戦者か 血沸く血沸く♪</Text>
           <CommonButton
             containerStyle={styles.mainTextButton}
-            isActive={!!jenny}
+            isActive={__DEV__ || !!jenny}
             isSquere
             title={'はじめる'}
             onPress={onPressStart}
