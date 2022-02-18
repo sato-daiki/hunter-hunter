@@ -70,8 +70,8 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
 
   return (
     <Layout>
+      <LoadingModal visible={isLoading} text='loading' />
       <View style={styles.container}>
-        <LoadingModal visible={isLoading} text='loading' />
         <WhiteBoard>
           <Text style={styles.title}>{messege.title}</Text>
           <Text style={styles.description}>{messege.description}</Text>
@@ -83,14 +83,11 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
           isSquere
           title={
             route.params.score < 90
-              ? '結果を見る（動画広告をみた後に見れます）'
+              ? '結果を見る\n(不合格者は動画広告をみた後見れます)'
               : '結果を見る'
           }
-          onPress={
-            route.params.score < 90 && !__DEV__
-              ? showAdReward
-              : goToResultDetail
-          }
+          textStyle={{ textAlign: 'center' }}
+          onPress={route.params.score < 90 ? showAdReward : goToResultDetail}
         />
         <SubButton
           containerStyle={styles.textButton}

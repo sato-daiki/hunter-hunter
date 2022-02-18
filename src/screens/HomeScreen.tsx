@@ -58,8 +58,8 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <Layout enableSafeArea>
+      <LoadingModal visible={isLoading} text='loading' />
       <View style={styles.container}>
-        <LoadingModal visible={isLoading} text='loading' />
         <View style={styles.header}>
           <Text style={styles.hightScore}>
             {hightScore !== null && `ハイスコア ${hightScore}点`}
@@ -74,7 +74,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
           <Text style={styles.title}>この年で挑戦者か 血沸く血沸く♪</Text>
           <CommonButton
             containerStyle={styles.mainTextButton}
-            isActive={__DEV__ || !!jenny}
+            isActive={!!jenny}
             isSquere
             title={'はじめる'}
             onPress={onPressStart}

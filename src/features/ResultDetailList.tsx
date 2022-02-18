@@ -83,9 +83,11 @@ const styles = StyleSheet.create({
   },
   answerContainer: {
     flex: 1,
+    paddingRight: 4,
   },
   correctContainer: {
     flex: 1,
+    paddingLeft: 4,
   },
   label: {
     width: 40,
