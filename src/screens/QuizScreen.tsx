@@ -18,7 +18,6 @@ import CommonButton from '@/components/molecules/CommonButton';
 import { RootStackParamList } from '@/navigations/RootNavigation';
 import Loading from '@/components/atoms/Loading';
 import { Quiz, Option } from '@/types/quiz';
-import { NUMBER_QUESTION, TIMEOUT_OPTION_ID } from '@/config/common';
 import WhiteBoard from '@/components/molecules/WhiteBoard';
 import { User } from '@/types/user';
 import { quizAll } from '@assets/quizAll';
@@ -28,6 +27,9 @@ type NavigationProp = StackNavigationProp<RootStackParamList, 'Quiz'>;
 type Props = {
   navigation: NavigationProp;
 };
+
+const TIMEOUT_OPTION_ID = '99';
+const NUMBER_QUESTION = 50;
 
 const QuizScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch: any = useDispatch();

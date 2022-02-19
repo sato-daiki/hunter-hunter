@@ -5,9 +5,7 @@ import {
   setTestDeviceIDAsync,
   requestPermissionsAsync,
 } from 'expo-ads-admob';
-
-const IOS_AD_UNIT_ID = 'ca-app-pub-0770181536572634/4764854907';
-const ANDROID_AD_UNIT_ID = 'ca-app-pub-0770181536572634/2162742296';
+import { ANDROID_AD_UNIT_ID, IOS_AD_UNIT_ID } from '@/config/common';
 
 const BottomBanner: React.FC = () => {
   const [loadingAdmobError, setLoadingAdmobError] = useState(false);

@@ -1,9 +1,23 @@
 import { Message } from '@/types/message';
 
-export const TIMEOUT_OPTION_ID = '99';
-export const NUMBER_QUESTION = 50;
-export const APP_URL =
-  'iOS:https://itunes.apple.com/jp/app/id1609851189 Android:https://play.google.com/store/apps/details?id=app.manqui.hunter';
+// Google問合せフォーム
+export const CONTACT_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSdCnvFKtO0AMFM6oBP9g2MmJ_9P7_ELUPJUuSrYyNtAZcx_oA/viewform?usp=sf_link';
+
+// AdMobバナー広告
+export const IOS_AD_UNIT_ID = 'ca-app-pub-0770181536572634/4764854907';
+export const ANDROID_AD_UNIT_ID = 'ca-app-pub-0770181536572634/2162742296';
+
+// AdMobリワード広告
+export const IOS_AD_REWARD_ID = 'ca-app-pub-0770181536572634/2216575001';
+export const ANDROID_AD_REWART_ID = 'ca-app-pub-0770181536572634/2549755100';
+
+export const TITLE = 'HUNTER検定';
+export const UNIT = 'ジェニー';
+export const HOME_TITILE = 'この年で挑戦者か 血沸く血沸く♪';
+export const IOS_URL = 'https://itunes.apple.com/jp/app/id1609851189';
+export const ANDROID_URL =
+  'https://play.google.com/store/apps/details?id=app.manqui.hunter';
 
 const SCORE_MESSAGE_0: Message = {
   title: '『不真面目野郎』',
@@ -108,6 +122,7 @@ const SCORE_MESSAGE_100: Message = {
     '其の方が己を高めんが為捧ぎ続けた永き時その成果、しかと受け取った。一個が修練の末届きうる限界。それを卓越した稀有な事例といえよう。天晴れだ。',
 };
 
+// 以下固定
 export const getMessage = (score: number) => {
   if (score === 100) {
     return SCORE_MESSAGE_100;

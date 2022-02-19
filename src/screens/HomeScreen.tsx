@@ -13,6 +13,7 @@ import LoadingModal from '@/components/atoms/LoadingModal';
 import { User } from '@/types/user';
 import { HomeLogo, Jenny } from '@assets/';
 import SubButton from '@/components/molecules/SubButton';
+import { CONTACT_URL, HOME_TITILE, UNIT } from '@/config/common';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -51,9 +52,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   }, [showAdReward]);
 
   const onPressContant = useCallback(() => {
-    Linking.openURL(
-      'https://docs.google.com/forms/d/e/1FAIpQLSdCnvFKtO0AMFM6oBP9g2MmJ_9P7_ELUPJUuSrYyNtAZcx_oA/viewform?usp=sf_link',
-    );
+    Linking.openURL(CONTACT_URL);
   }, []);
 
   return (
@@ -66,12 +65,15 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
           </Text>
           <View style={styles.jennyContainer}>
             <Image source={Jenny} style={styles.jennyIcon} />
-            <Text style={styles.jennyText}>{jenny}ジェニー</Text>
+            <Text style={styles.jennyText}>
+              {jenny}
+              {UNIT}
+            </Text>
           </View>
         </View>
         <View style={styles.main}>
           <Image source={HomeLogo} style={styles.homeLogo} />
-          <Text style={styles.title}>この年で挑戦者か 血沸く血沸く♪</Text>
+          <Text style={styles.title}>{HOME_TITILE}</Text>
           <CommonButton
             containerStyle={styles.mainTextButton}
             isActive={!!jenny}
@@ -83,7 +85,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             containerStyle={styles.textButton}
             isActive
             isSquere
-            title={'動画広告を見てジェニーを貯める'}
+            title={`動画広告を見て${UNIT}を貯める`}
             onPress={onPressAds}
           />
           <SubButton

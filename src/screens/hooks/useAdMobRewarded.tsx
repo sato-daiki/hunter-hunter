@@ -3,21 +3,13 @@ import { AdMobRewarded, setTestDeviceIDAsync } from 'expo-ads-admob';
 
 import { Platform } from 'react-native';
 import { commonAlert } from '@/utils/alert';
-import { useDispatch, useSelector } from 'react-redux';
-import { User } from '@/types/user';
-
-const IOS_AD_UNIT_ID = 'ca-app-pub-0770181536572634/2216575001';
-const ANDROID_AD_UNIT_ID = 'ca-app-pub-0770181536572634/2549755100';
+import { ANDROID_AD_REWART_ID, IOS_AD_REWARD_ID } from '@/config/common';
 
 type Props = {
   afterEarn: () => void;
 };
 
 export const useAdMobRewarded = ({ afterEarn }: Props) => {
-  const dispatch: any = useDispatch();
-  const userState: User = useSelector((state: any) => state.user);
-  const { jenny } = userState;
-
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const f = async () => {
@@ -57,7 +49,7 @@ export const useAdMobRewarded = ({ afterEarn }: Props) => {
     try {
       await setTestDeviceIDAsync('EMULATOR');
       await AdMobRewarded.setAdUnitID(
-        Platform.OS === 'ios' ? IOS_AD_UNIT_ID : ANDROID_AD_UNIT_ID,
+        Platform.OS === 'ios' ? IOS_AD_REWARD_ID : ANDROID_AD_REWART_ID,
       );
       await AdMobRewarded.requestAdAsync();
       await AdMobRewarded.showAdAsync();
