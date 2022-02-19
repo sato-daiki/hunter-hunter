@@ -1292,6 +1292,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.9"
 
+"@manga-quiz/template@^1.0.0":
+  version "1.0.0"
+  resolved "https://npm.pkg.github.com/download/@manga-quiz/template/1.0.0/af73bbfcbdc6cfd9542d6c49ab92ca848a6db9d1f5cc91ef3e79a4f691f65d95#7e6afdabaefb9e93ce1c3527792a0f67c092ff80"
+  integrity sha512-jvfeuYvdxR3V42hAYit22RsimAg1MHMclddfcK6nPVcU8UmIqex4sI26JlM+01w7oPo33ztblxMk4jTUHHjwrg==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
