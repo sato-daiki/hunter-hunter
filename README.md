@@ -1,6 +1,9 @@
 ```
 リリース
+app jsonのversion, buildNumber, versionCodeを更新
 eas build --platform all
+
+
 ```
 
 ```
