@@ -174,8 +174,7 @@ const styles = StyleSheet.create({
   },
   quit: {
     ...commonText.description,
-    color: '#000',
-    paddingHorizontal: 10,
+    color: textColor,
   },
   main: {
     flex: 1,

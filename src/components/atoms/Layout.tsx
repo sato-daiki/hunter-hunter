@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {View, ViewProps, ViewStyle, StyleProp} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { View, ViewProps, ViewStyle, StyleProp } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   ScrollViewWithRefresh,
   ScrollViewWithRefreshProps,
 } from './ScrollViewWithRefresh';
+import { baseColor } from '@/styles/common';
 
 type Props = ViewProps & {
   scrollViewProps?: ScrollViewWithRefreshProps;
@@ -35,17 +36,17 @@ export const Layout: React.FC<Props> = React.memo(
     };
     const innerStyles: StyleProp<ViewStyle> = [
       enableSafeArea ? safeStyle : undefined,
-      {flex: 1, backgroundColor: '#fff'},
+      { flex: 1, backgroundColor: baseColor },
       innerStyle,
     ];
 
     return (
-      <View style={[{flex: 1}, style]} {...passProps}>
+      <View style={[{ flex: 1 }, style]} {...passProps}>
         {disableScroll ? (
           <View style={innerStyles}>{children}</View>
         ) : (
           <ScrollViewWithRefresh
-            contentContainerStyle={[{flexGrow: 1}, innerContainerStyle]}
+            contentContainerStyle={[{ flexGrow: 1 }, innerContainerStyle]}
             refreshing={scrollViewProps?.refreshing || false}
             {...scrollViewProps}
           >
@@ -54,7 +55,7 @@ export const Layout: React.FC<Props> = React.memo(
         )}
       </View>
     );
-  }
+  },
 );
 
 Layout.displayName = 'Layout';

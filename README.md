@@ -6,9 +6,16 @@ eas build --platform all
 ```
 [最初]
 - hunter-hunterのフォルダをコピーして漫画名にする
+- .gitを削除する
+- git init
+- yarn install
 
 [問合せ]
 Googleフォームを作成
+https://docs.google.com/forms/u/0/
+
+※回答→通知を受け取るを忘れないように
+※短縮URLはだめ！
 
 [広告]
 AbMobで、iOSとAnrdoid両方で、リワードとフッターの両方を取得する

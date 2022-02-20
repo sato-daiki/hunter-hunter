@@ -11,4 +11,6 @@ export const DefaultNavigationOptions: NativeStackNavigationOptions = {
     ...commonText.title,
     color: textColor,
   },
+  headerBackTitle: '戻る',
+  headerTintColor: textColor,
 };

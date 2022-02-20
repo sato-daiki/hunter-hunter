@@ -8,9 +8,11 @@ import { DefaultNavigationOptions } from '@/config/NavigationOptions';
 import { WebViewNavParams, WebViewScreen } from '@/screens/WebViewScreen';
 import { Quiz, Option } from '@/types/quiz';
 import ResultDetailScreen from '@/screens/ResultDetailScreen';
+import RuleScreen from '@/screens/RuleScreen';
 
 export type RootStackParamList = {
   Home: undefined;
+  Rule: undefined;
   Quiz: undefined;
   Result: { score: number; quiz: Quiz[]; answerOptions: Option[] };
   ResultDetail: { quiz: Quiz[]; answerOptions: Option[] };
@@ -35,6 +37,13 @@ const RootNavigation = () => {
         }}
       />
       <Stack.Screen
+        name='Rule'
+        component={RuleScreen}
+        options={{
+          title: 'ルール',
+        }}
+      />
+      <Stack.Screen
         name='Quiz'
         component={QuizScreen}
         options={{
@@ -46,7 +55,7 @@ const RootNavigation = () => {
         component={ResultScreen}
         options={{
           title: '結果発表',
-          headerLeft: () => null,
+          headerBackVisible: false,
         }}
       />
       <Stack.Screen
@@ -54,7 +63,6 @@ const RootNavigation = () => {
         component={ResultDetailScreen}
         options={{
           title: '詳細',
-          headerLeft: () => null,
         }}
       />
       <Stack.Screen name='WebView' component={WebViewScreen} />

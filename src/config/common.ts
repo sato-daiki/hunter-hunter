@@ -13,8 +13,13 @@ export const IOS_AD_REWARD_ID = 'ca-app-pub-0770181536572634/2216575001';
 export const ANDROID_AD_REWART_ID = 'ca-app-pub-0770181536572634/2549755100';
 
 export const TITLE = 'HUNTER検定';
+export const QUIZ_TOTAL_NUM = '全800問以上';
 export const UNIT = 'ジェニー';
 export const HOME_TITILE = 'この年で挑戦者か 血沸く血沸く♪';
+
+export const RULE_TITILE =
+  'そこそこ難易度が高い漫画のクイズ\n全50問の検定で90点以上なら合格じゃ\nまぁ達成難度は「D」ってとこかの';
+
 export const IOS_URL = 'https://itunes.apple.com/jp/app/id1609851189';
 export const ANDROID_URL =
   'https://play.google.com/store/apps/details?id=app.manqui.hunter';

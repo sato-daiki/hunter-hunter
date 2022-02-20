@@ -51,6 +51,10 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     showAdReward();
   }, [showAdReward]);
 
+  const onPressRule = useCallback(() => {
+    navigation.navigate('Rule');
+  }, []);
+
   const onPressContant = useCallback(() => {
     Linking.openURL(CONTACT_URL);
   }, []);
@@ -87,6 +91,13 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             isSquere
             title={`動画広告を見て${UNIT}を貯める`}
             onPress={onPressAds}
+          />
+          <SubButton
+            containerStyle={styles.textButton}
+            isActive
+            isSquere
+            title={'ルール'}
+            onPress={onPressRule}
           />
           <SubButton
             containerStyle={styles.textButton}
