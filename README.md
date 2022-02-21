@@ -47,14 +47,14 @@ name
 
 [画像]
 - home-logo.png（500*200）
-- adaptive-icon.png（1024*1024）
-- icon.png（1024*1024）
+- adaptive-icon.png（1024*1024）　PhotoSpaceXで66%でちょうどいい
+- icon.png（1024*1024）　https://sozai.cman.jp/icon/string/alphabet1/?p=2
 - splash.png（500*200）
 - jenny.png（200*200）
 
 [クイズ]
 - ONEDRIVE にエクセルファイルをあげる
-- csv ファイルをアウトプットする
+- csv ファイルをアウトプットする（挿入→export csv）
 - https://www.aconvert.com/jp/document/csv-to-json/ このサイトで json ファイルに変換する
 - quiz-batch の inputs フォルダに csv ファイルをおく（ファイル名は base.json）
 - node csv.ts を実行すると、outputs フォルダに list.json ファイルがあるのでコピーする
