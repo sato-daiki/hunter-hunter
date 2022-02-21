@@ -53,7 +53,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
   const onPressRule = useCallback(() => {
     navigation.navigate('Rule');
-  }, []);
+  }, [navigation]);
 
   const onPressContant = useCallback(() => {
     Linking.openURL(CONTACT_URL);
