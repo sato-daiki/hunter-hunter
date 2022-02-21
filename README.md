@@ -2,6 +2,7 @@
 初回リリース
 eas build --platform all
 
+スクショのサイズ
 iPhone 11Pro Max
 iPhone 8 Plus
 iPad Pro 12.9
