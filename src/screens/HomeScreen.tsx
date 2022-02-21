@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     ...commonText.title,
     fontWeight: 'bold',
     marginBottom: 30,
+    textAlign: 'center',
   },
   mainTextButton: {
     marginBottom: 10,
