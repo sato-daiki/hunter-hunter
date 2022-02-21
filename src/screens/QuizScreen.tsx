@@ -84,7 +84,7 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
   const onPressItem = useCallback(
     async (option: Option) => {
       if (option.optionId === '0') {
-        score.current = score.current + 1;
+        score.current = score.current + 2;
       }
       answerOptions.current.push(option);
       const nextNumber = number + 1;

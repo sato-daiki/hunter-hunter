@@ -1,9 +1,14 @@
 ```
+初回リリース
+eas build --platform all
+
+iPhone 11Pro Max
+```
+
+```
 リリース
 app jsonのversion, buildNumber, versionCodeを更新
 eas build --platform all
-
-
 ```
 
 ```
