@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, Linking } from 'react-native';
+import { StyleSheet, View, Text, Image, Linking, Platform } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,6 +20,12 @@ type NavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 type Props = {
   navigation: NavigationProp;
 };
+
+const IOS_OTHER_APP_URL =
+  'https://apps.apple.com/jp/developer/daiki-sato/id1329526543';
+
+const ANDROID_OTHER_APP_URL =
+  'https://play.google.com/store/apps/collection/cluster?clp=igM4ChkKEzkwMzUxOTAwMjgyMjMyMjQ1NzEQCBgDEhkKEzkwMzUxOTAwMjgyMjMyMjQ1NzEQCBgDGAA%3D:S:ANO1ljJOcEQ&gsr=CjuKAzgKGQoTOTAzNTE5MDAyODIyMzIyNDU3MRAIGAMSGQoTOTAzNTE5MDAyODIyMzIyNDU3MRAIGAMYAA%3D%3D:S:ANO1ljKkbr0';
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const dispatch: any = useDispatch();
@@ -54,6 +60,12 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const onPressRule = useCallback(() => {
     navigation.navigate('Rule');
   }, [navigation]);
+
+  const onPressOther = useCallback(() => {
+    Linking.openURL(
+      Platform.OS === 'ios' ? IOS_OTHER_APP_URL : ANDROID_OTHER_APP_URL,
+    );
+  }, []);
 
   const onPressContant = useCallback(() => {
     Linking.openURL(CONTACT_URL);
@@ -105,6 +117,13 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             isSquere
             title={'お問い合わせ'}
             onPress={onPressContant}
+          />
+          <SubButton
+            containerStyle={styles.textButton}
+            isActive
+            isSquere
+            title={'他の漫画オタク検定'}
+            onPress={onPressOther}
           />
         </View>
       </View>

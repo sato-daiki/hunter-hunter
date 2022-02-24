@@ -9,7 +9,7 @@ import { baseColor, commonText } from '@/styles/common';
 import { RootStackParamList } from '@/navigations/RootNavigation';
 import WhiteBoard from '@/components/molecules/WhiteBoard';
 import { RouteProp } from '@react-navigation/native';
-import { ANDROID_URL, getMessage, IOS_URL, TITLE } from '@/config/common';
+import { getMessage, SHARE_URL, TITLE } from '@/config/common';
 import { Message } from '@/types/message';
 import SubButton from '@/components/molecules/SubButton';
 import { useAdMobRewarded } from './hooks/useAdMobRewarded';
@@ -35,11 +35,9 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
   }, [navigation]);
 
   const onPressShare = useCallback(async () => {
-    const SHARE_URL = `iOS:${IOS_URL} Android:${ANDROID_URL}`;
-
     try {
       const result = await Share.share({
-        message: `${TITLE}の結果${route.params.score}点${messege.title}${messege.description} ${SHARE_URL}`,
+        message: `${TITLE}の結果${route.params.score}点${messege.title}${messege.description} #漫画オタク検定 ${SHARE_URL}`,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {

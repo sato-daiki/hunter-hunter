@@ -2,7 +2,7 @@
   "expo": {
     "name": "Hunter検定",
     "slug": "hunter",
-    "version": "1.0.9",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -16,7 +16,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "1010900",
+      "buildNumber": "1020000",
       "supportsTablet": true,
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-0770181536572634~8923591763"
@@ -29,7 +29,7 @@
     },
     "android": {
       "package": "app.manqui.hunter",
-      "versionCode": 1010900,
+      "versionCode": 1020000,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#840303"

@@ -2,10 +2,18 @@
 初回リリース
 eas build --platform all
 
+androidの対象年齢を13歳以上にすること
+
 スクショのサイズ
 iPhone 11Pro Max
 iPhone 8 Plus
 iPad Pro 12.9
+
+スクリーンショット作成
+https://app-mockup.com/
+
+リリース後
+- ADMOB更新
 ```
 
 ```
