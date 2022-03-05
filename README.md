@@ -14,6 +14,9 @@ https://app-mockup.com/
 
 リリース後
 - ADMOB更新
+
+ワードプレスの更新
+- url作成 (https://mama-hack.com/app-reach/)
 ```
 
 ```
@@ -51,12 +54,10 @@ src/common/common.tsの値を修正
 - ios.buildNumber
 - ios.config.googleMobileAdsAppId
 - ios.bundleIdentifier
-- ios.appStoreUrl
 - android.package
 - android.versionCode
 - android.adaptiveIcon.backgroundColor
 - android.config.googleMobileAdsAppId
-- android.playStoreUrl
 
 [pakacege.json]
 name

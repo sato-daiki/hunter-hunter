@@ -37,7 +37,7 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
   const onPressShare = useCallback(async () => {
     try {
       const result = await Share.share({
-        message: `${TITLE}の結果${route.params.score}点${messege.title}${messege.description} #漫画オタク検定 ${SHARE_URL}`,
+        message: `${TITLE}の結果→${route.params.score}点\n${messege.title}\n${messege.description}\n${SHARE_URL}\n#漫画オタク検定`,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {

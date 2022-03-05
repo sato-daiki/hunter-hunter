@@ -20,7 +20,7 @@ export const HOME_TITILE = 'この年で挑戦者か 血沸く血沸く♪';
 export const RULE_TITILE =
   'そこそこ難易度が高い漫画のクイズ\n全50問の検定で90点以上なら合格じゃ\nまぁ達成難度は「D」ってとこかの';
 
-export const SHARE_URL = 'http://manga-otaku.com/hunter-hunter/';
+export const SHARE_URL = 'http://manga-otaku.com/hunter-hunter';
 
 const SCORE_MESSAGE_0: Message = {
   title: '『不真面目野郎』',
