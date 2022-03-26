@@ -12,8 +12,6 @@ import { RouteProp } from '@react-navigation/native';
 import { getMessage, SHARE_URL, TITLE } from '@/config/common';
 import { Message } from '@/types/message';
 import SubButton from '@/components/molecules/SubButton';
-import { useAdMobRewarded } from './hooks/useAdMobRewarded';
-import LoadingModal from '@/components/atoms/LoadingModal';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Result'>;
 
@@ -60,15 +58,8 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
     });
   }, [navigation, route.params.answerOptions, route.params.quiz]);
 
-  const afterEarn = useCallback(async () => {
-    goToResultDetail();
-  }, [goToResultDetail]);
-
-  const { isLoading, showAdReward } = useAdMobRewarded({ afterEarn });
-
   return (
     <Layout>
-      <LoadingModal visible={isLoading} text='loading' />
       <View style={styles.container}>
         <WhiteBoard>
           <Text style={styles.title}>{messege.title}</Text>
@@ -79,13 +70,9 @@ const ResultScreen: React.FC<Props> = ({ navigation, route }) => {
           containerStyle={styles.mainTextButton}
           isActive
           isSquere
-          title={
-            route.params.score < 90
-              ? '結果を見る\n(不合格者は動画広告をみた後見れます)'
-              : '結果を見る'
-          }
+          title={'結果を見る'}
           textStyle={{ textAlign: 'center' }}
-          onPress={route.params.score < 90 ? showAdReward : goToResultDetail}
+          onPress={goToResultDetail}
         />
         <SubButton
           containerStyle={styles.textButton}
