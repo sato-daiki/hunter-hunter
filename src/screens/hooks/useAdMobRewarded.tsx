@@ -3,7 +3,7 @@ import { AdMobRewarded, setTestDeviceIDAsync } from 'expo-ads-admob';
 
 import { Platform } from 'react-native';
 import { commonAlert } from '@/utils/alert';
-import { ANDROID_AD_REWART_ID, IOS_AD_REWARD_ID } from '@/config/common';
+import { ANDROID_AD_REWARD_ID, IOS_AD_REWARD_ID } from '@/config/common';
 
 type Props = {
   afterEarn: () => void;
@@ -33,7 +33,7 @@ export const useAdMobRewarded = ({ afterEarn }: Props) => {
   const rewardedVideoUserDidEarnReward = useCallback(async () => {
     // 広告をみた人が実行できる処理
     console.log('rewardedVideoUserDidEarnReward');
-    afterEarn();
+    await afterEarn();
   }, [afterEarn]);
 
   const rewardedVideoDidFailToLoad = useCallback(() => {
@@ -49,7 +49,7 @@ export const useAdMobRewarded = ({ afterEarn }: Props) => {
     try {
       await setTestDeviceIDAsync('EMULATOR');
       await AdMobRewarded.setAdUnitID(
-        Platform.OS === 'ios' ? IOS_AD_REWARD_ID : ANDROID_AD_REWART_ID,
+        Platform.OS === 'ios' ? IOS_AD_REWARD_ID : ANDROID_AD_REWARD_ID,
       );
       await AdMobRewarded.requestAdAsync();
       await AdMobRewarded.showAdAsync();

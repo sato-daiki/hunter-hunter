@@ -1,19 +1,16 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, View, Text, Image, Linking, Platform } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import * as userActions from '@/store/actions/user';
 import { Layout } from '@/components/atoms';
 import CommonButton from '@/components/molecules/CommonButton';
 import { baseColor, commonText } from '@/styles/common';
 import { RootStackParamList } from '@/navigations/RootNavigation';
-import { useAdMobRewarded } from './hooks/useAdMobRewarded';
-import LoadingModal from '@/components/atoms/LoadingModal';
 import { User } from '@/types/user';
-import { HomeLogo, Jenny } from '@assets/';
+import { HomeLogo } from '@assets/';
 import SubButton from '@/components/molecules/SubButton';
-import { CONTACT_URL, HOME_TITILE, UNIT } from '@/config/common';
+import { CONTACT_URL, HOME_TITILE } from '@/config/common';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -21,50 +18,22 @@ type Props = {
   navigation: NavigationProp;
 };
 
-const IOS_OTHER_APP_URL =
-  'https://apps.apple.com/jp/developer/daiki-sato/id1329526543';
-
-const ANDROID_OTHER_APP_URL =
-  'https://play.google.com/store/apps/collection/cluster?clp=igM4ChkKEzkwMzUxOTAwMjgyMjMyMjQ1NzEQCBgDEhkKEzkwMzUxOTAwMjgyMjMyMjQ1NzEQCBgDGAA%3D:S:ANO1ljJOcEQ&gsr=CjuKAzgKGQoTOTAzNTE5MDAyODIyMzIyNDU3MRAIGAMSGQoTOTAzNTE5MDAyODIyMzIyNDU3MRAIGAMYAA%3D%3D:S:ANO1ljKkbr0';
+const MANGA_OTAKU = 'https://manga-otaku.com/';
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
-  const dispatch: any = useDispatch();
   const userState: User = useSelector((state: any) => state.user);
-  const { jenny, hightScore } = userState;
-
-  const afterEarn = useCallback(async () => {
-    await dispatch(userActions.updateJenny(jenny ? jenny + 1 : 1));
-  }, [jenny, dispatch]);
-
-  const { isLoading, showAdReward } = useAdMobRewarded({ afterEarn });
-
-  useEffect(() => {
-    const f = async () => {
-      if (jenny === null && hightScore === null) {
-        await dispatch(userActions.initStorage());
-      }
-    };
-    f();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { hightScore } = userState;
 
   const onPressStart = useCallback(async () => {
-    await dispatch(userActions.updateJenny(jenny ? jenny - 1 : 0));
     navigation.navigate('Quiz');
-  }, [jenny, dispatch, navigation]);
-
-  const onPressAds = useCallback(() => {
-    showAdReward();
-  }, [showAdReward]);
+  }, [navigation]);
 
   const onPressRule = useCallback(() => {
     navigation.navigate('Rule');
   }, [navigation]);
 
   const onPressOther = useCallback(() => {
-    Linking.openURL(
-      Platform.OS === 'ios' ? IOS_OTHER_APP_URL : ANDROID_OTHER_APP_URL,
-    );
+    Linking.openURL(MANGA_OTAKU);
   }, []);
 
   const onPressContant = useCallback(() => {
@@ -73,36 +42,21 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <Layout enableSafeArea>
-      <LoadingModal visible={isLoading} text='loading' />
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.hightScore}>
             {hightScore !== null && `ハイスコア ${hightScore}点`}
           </Text>
-          <View style={styles.jennyContainer}>
-            <Image source={Jenny} style={styles.jennyIcon} />
-            <Text style={styles.jennyText}>
-              {jenny}
-              {UNIT}
-            </Text>
-          </View>
         </View>
         <View style={styles.main}>
           <Image source={HomeLogo} style={styles.homeLogo} />
           <Text style={styles.title}>{HOME_TITILE}</Text>
           <CommonButton
             containerStyle={styles.mainTextButton}
-            isActive={!!jenny}
+            isActive
             isSquere
             title={'はじめる'}
             onPress={onPressStart}
-          />
-          <SubButton
-            containerStyle={styles.textButton}
-            isActive
-            isSquere
-            title={`動画広告を見て${UNIT}を貯める`}
-            onPress={onPressAds}
           />
           <SubButton
             containerStyle={styles.textButton}
@@ -141,21 +95,9 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   hightScore: {
-    ...commonText.description,
-  },
-  jennyContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  jennyIcon: {
-    width: 16,
-    height: 16,
-    marginRight: 4,
-  },
-  jennyText: {
     ...commonText.description,
   },
   main: {

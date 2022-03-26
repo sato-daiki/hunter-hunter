@@ -1,5 +1,4 @@
 export const StorageKey = {
-  jenny: 'jenny',
   hightScore: 'hightScore',
 } as const;
 

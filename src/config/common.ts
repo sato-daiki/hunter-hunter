@@ -10,11 +10,10 @@ export const ANDROID_AD_UNIT_ID = 'ca-app-pub-0770181536572634/2162742296';
 
 // AdMobリワード広告
 export const IOS_AD_REWARD_ID = 'ca-app-pub-0770181536572634/2216575001';
-export const ANDROID_AD_REWART_ID = 'ca-app-pub-0770181536572634/2549755100';
+export const ANDROID_AD_REWARD_ID = 'ca-app-pub-0770181536572634/2549755100';
 
 export const TITLE = 'ハンターハンター漫画オタク検定';
 export const QUIZ_TOTAL_NUM = '全800問以上';
-export const UNIT = 'ジェニー';
 export const HOME_TITILE = 'この年で挑戦者か 血沸く血沸く♪';
 
 export const RULE_TITILE =

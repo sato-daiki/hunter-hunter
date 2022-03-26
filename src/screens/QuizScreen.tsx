@@ -43,7 +43,7 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
   const score = useRef<number>(0);
   const answerOptions = useRef<Option[]>([]);
 
-  const { jenny, hightScore } = userState;
+  const { hightScore } = userState;
 
   useEffect(() => {
     const quizShuffle = arrayShuffle(quizAll);
@@ -96,9 +96,6 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
         if (!hightScore || score.current > hightScore) {
           await dispatch(userActions.updateHightScore(score.current));
         }
-        if (score.current >= 90) {
-          await dispatch(userActions.updateJenny(jenny ? jenny + 1 : 1));
-        }
         navigation.navigate('Result', {
           score: score.current,
           quiz,
@@ -106,7 +103,7 @@ const QuizScreen: React.FC<Props> = ({ navigation }) => {
         });
       }
     },
-    [dispatch, hightScore, jenny, navigation, number, quiz],
+    [dispatch, hightScore, navigation, number, quiz],
   );
 
   const onComplete = useCallback(() => {

@@ -67,7 +67,6 @@ name
 - adaptive-icon.png（1024*1024）　PhotoSpaceXで66%でちょうどいい
 - icon.png（1024*1024）　https://sozai.cman.jp/icon/string/alphabet1/?p=2
 - splash.png（500*200）
-- jenny.png（200*200）
 
 [クイズ]
 - ONEDRIVE にエクセルファイルをあげる

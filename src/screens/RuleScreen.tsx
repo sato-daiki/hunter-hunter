@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Layout } from '@/components/atoms';
 import { baseColor, commonText, textColor } from '@/styles/common';
 import WhiteBoard from '@/components/molecules/WhiteBoard';
-import { QUIZ_TOTAL_NUM, RULE_TITILE, UNIT } from '@/config/common';
+import { QUIZ_TOTAL_NUM, RULE_TITILE } from '@/config/common';
 
 const ResultScreen: React.FC = () => {
   return (
@@ -16,13 +16,8 @@ const ResultScreen: React.FC = () => {
         <Text style={styles.description}>
           ●詳細{'\n'}
           {QUIZ_TOTAL_NUM}のクイズの中からランダムで50問を選び、問題を出します。
-          90点以上で合格です。1{UNIT}が獲得できます。
+          90点以上で合格です。
           難易度はそこそこ高めです。自称オタクのみなさんの挑戦受け付けています。
-          {'\n'}
-          {'\n'}
-          {'\n'}●{UNIT}について{'\n'}
-          検定には1{UNIT}必要です。 初回ダウンロードで2{UNIT}をプレゼント！
-          また、動画広告を見ることで、{UNIT}は獲得できます。{'\n'}
           {'\n'}
           {'\n'}
           ●結果確認画面{'\n'}
