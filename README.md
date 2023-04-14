@@ -1,78 +1,9 @@
-```
-初回リリース
-eas build --platform all
+## 概要
+Hunter * Hunterのクイズアプリです。React Nativeで実装しております。
 
-androidの対象年齢を13歳以上にすること
+React Nativeのサンプルコードが世の中に少ないので、公開することにしました。
 
-スクショのサイズ
-iPhone 11Pro Max
-iPhone 8 Plus
-iPad Pro 12.9
+シンプルのソースコードですが、よかったら参考にしてください。iOS, Android共にstoreに公開中です。
 
-スクリーンショット作成
-https://app-mockup.com/
-
-リリース後
-- ADMOB更新
-
-ワードプレスの更新
-- url作成 (https://mama-hack.com/app-reach/)
-```
-
-```
-リリース
-app jsonのversion, buildNumber, versionCodeを更新
-eas build --platform all
-```
-
-```
-[最初]
-- hunter-hunterのフォルダをコピーして漫画名にする
-- .gitを削除する
-- git init
-- yarn install
-
-[問合せ]
-Googleフォームを作成
-https://docs.google.com/forms/u/0/
-
-※回答→通知を受け取るを忘れないように
-※短縮URLはだめ！
-
-[広告]
-AbMobで、iOSとAnrdoid両方で、リワードとフッターの両方を取得する
-
-[設定変更]
-src/styles/common.tsの色を修正
-src/common/common.tsの値を修正
-
-[app.json]
-- name
-- slug
-- version
-- splash.backgroundColor
-- ios.buildNumber
-- ios.config.googleMobileAdsAppId
-- ios.bundleIdentifier
-- android.package
-- android.versionCode
-- android.adaptiveIcon.backgroundColor
-- android.config.googleMobileAdsAppId
-
-[pakacege.json]
-name
-
-[画像]
-- home-logo.png（500*200）
-- adaptive-icon.png（1024*1024）　PhotoSpaceXで66%でちょうどいい
-- icon.png（1024*1024）　https://sozai.cman.jp/icon/string/alphabet1/?p=2
-- splash.png（500*200）
-
-[クイズ]
-- ONEDRIVE にエクセルファイルをあげる
-- csv ファイルをアウトプットする（挿入→export csv）
-- https://www.aconvert.com/jp/document/csv-to-json/ このサイトで json ファイルに変換する
-- quiz-batch の inputs フォルダに csv ファイルをおく（ファイル名は base.json）
-- node csv.ts を実行すると、outputs フォルダに list.json ファイルがあるのでコピーする
-- hunter-hunter の assets.quizAll.tsx に貼り付ける
-```
+アプリの詳細
+https://manga-otaku.com/
